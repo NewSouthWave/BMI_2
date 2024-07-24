@@ -13,18 +13,24 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
     // 전화면에서 전달받은 데이터들
-    var bmiNumber: Double?
-    var adviceString: String?
-    var bmiColor: UIColor?
+//    var bmiNumber: Double?
+//    var adviceString: String?
+//    var bmiColor: UIColor?
+    
+    var bmi: BMI?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // 전화면에서 전달받은 데이터들을 통해 셋팅
-        bmiNumberLabel.text = "\(bmiNumber!)"
-        bmiNumberLabel.backgroundColor = bmiColor
-        adviceLabel.text = adviceString
         
         configureUI()
+
+        guard let bmi = bmi else { return } //  bmi 변수 옵셔널 바인딩
+        
+        bmiNumberLabel.text = "\(bmi.value)"
+        bmiNumberLabel.backgroundColor = bmi.matchColor
+        adviceLabel.text = bmi.advice
+        
     }
     
     // UI셋팅
